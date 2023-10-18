@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1><a href="{{ path('roo.redirect') }}">Ajouter</a></h1>
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>rooname</td>
+        <td>Delete</td>
+        <td>Update</td>
+
+
+
+
+    </tr>
+
+    {% for i in x %}
+        <tr>
+            <td>{{ i.id }}</td>
+            <td>{{ i.name }}</td>
+            <td><a href="{{ path('roo.delete',{'id' : i.id }) }}">Delete</a></td>
+            <td><a href="{{ path('roo.edit',{'id' : i.id }) }}">Update</a></td>
+
+
+
+        </tr>
+
+    {% endfor %}
+
+
+
+
+</table>
+</body>
+</html>
