@@ -24,6 +24,34 @@ class AuthorRepository extends ServiceEntityRepository
 //    /**
 //     * @return Author[] Returns an array of Author objects
 //     */
+     public function OrderByDesc():array
+     {
+        return $this->createQueryBuilder('a',)
+            ->orderBy('a.username', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+
+     }
+    public function OrderByDesc1():array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery('SELECT p FROM App\Entity\Author p ORDER BY  p.username ASC ');
+        return $query->getResult();
+
+    }
+     public function showBookAuthor($id):array
+     {
+        return $this->createQueryBuilder('a')
+            ->join('a.nb_books','b')
+            ->addSelect('b')
+            ->where('b.author =: id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getResult()
+
+            ;
+     }
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('a')

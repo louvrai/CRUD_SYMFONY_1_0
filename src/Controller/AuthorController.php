@@ -13,13 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AuthorController extends AbstractController
 {
-    #[Route('/author', name: 'app_author')]
-    public function index(): Response
-    {
-        return $this->render('author/index.html.twig', [
-            'controller_name' => 'AuthorController',
-        ]);
-    }
+
 
 
     #[Route('/showauthor', name: 'author.show')]
@@ -52,6 +46,7 @@ class AuthorController extends AbstractController
         $author = new Author();
         $form = $this->createForm(AuthorType::class, $author);
         $form->handleRequest($req);
+
         if ($form->isSubmitted() and $form->isValid()) {
             $em->persist($author);
             $em->flush();
@@ -94,4 +89,29 @@ class AuthorController extends AbstractController
 
         return $this->redirectToRoute('author.show');
     }
+    #[Route('/orderAuthor', name: 'author.order')]
+    public function Order( AuthorRepository $authorRepo): Response
+    {
+
+        $idData = $authorRepo->OrderByDesc1();
+
+
+       return $this->render('author/index.html.twig',
+        [   'authors' => $idData
+        ]);
+
+    }
+    #[Route('/showbyid/{id}', name: 'author.byid')]
+    public function showById( AuthorRepository $authorRepo,$id): Response
+    {
+
+        $idData = $authorRepo->showBookAuthor($id);
+          dd($idData);
+
+        return $this->render('author/showby.html.twig',
+            [   'authors' => $idData
+            ]);
+
+    }
+
 }
