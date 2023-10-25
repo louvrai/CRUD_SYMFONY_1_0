@@ -17,6 +17,7 @@
             <td>Email</td>
             <td>Update</td>
             <td>Delete</td>
+            <td>show</td>
         </tr>
 
 {% for author in authors %}
@@ -26,6 +27,7 @@
             <td>{{ author.email }}</td>
             <td><a href="{{ path('author.edit' ,{'id': author.id})}}">editer</a></td>
             <td><a href="{{ path('author.delete' ,{'id': author.id})}}">supprimer</a></td>
+            {#  <td><a href="{{ path('/showbyid/{id}' ,{'id': author.id})}}">show</a></td>#}
         </tr>
         
         {% endfor %}
